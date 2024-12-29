@@ -1,0 +1,108 @@
+<antArtifact identifier="config-yaml" type="application/vnd.ant.code" language="yaml" title="Configuration File">
+storage:
+  # Local storage
+  local_data_path: "data"
+  local_model_path: "models"
+  
+  # AWS S3
+  use_s3: false
+  s3_bucket: "my-bucket"
+  s3_data_prefix: "data"
+  s3_model_prefix: "models"
+  aws_access_key_id: "YOUR_ACCESS_KEY"
+  aws_secret_access_key: "YOUR_SECRET_KEY"
+  aws_region: "us-east-1"
+  
+  # Google Cloud Storage
+  use_gcs: false
+  gcs_bucket: "my-gcs-bucket"
+  gcs_data_prefix: "data"
+  gcs_model_prefix: "models"
+  gcs_credentials_path: "path/to/credentials.json"
+  
+  # Hugging Face
+  use_huggingface: false
+  hf_token: "YOUR_HF_TOKEN"
+  hf_repo_id: "username/repo-name"
+  
+  # Kaggle
+  use_kaggle: false
+  kaggle_username: "YOUR_USERNAME"
+  kaggle_key: "YOUR_KEY"
+  kaggle_dataset: "dataset-name"
+  
+  # SFTP
+  use_sftp: false
+  sftp_host: "example.com"
+  sftp_username: "user"
+  sftp_password: "password"
+  sftp_data_path: "/data"
+  sftp_model_path: "/models"
+  
+  # FTP
+  use_ftp: false
+  ftp_host: "ftp.example.com"
+  ftp_username: "user"
+  ftp_password: "password"
+  ftp_data_path: "/data"
+  ftp_model_path: "/models"
+
+  # Configurações de armazenamento
+  data_path: "data"
+  chunk_size_gb: 10.0
+  min_free_space_gb: 5.0
+  
+  # Configurações de download
+  max_concurrent_downloads: 1
+  verify_checksums: true
+  
+  # Configurações de limpeza
+  cleanup_after_training: true
+  keep_checkpoints: true
+
+model:
+  text_embedding_dim: 512
+  image_size: [224, 224]
+  video_frames: 30
+  audio_samples: 16000
+  batch_size: 32
+  learning_rate: 0.001
+  num_epochs: 10
+  validation_split: 0.2
+  optimizer: "adam"
+  loss: "sparse_categorical_crossentropy"
+  metrics: ["accuracy", "precision", "recall"]
+
+distributed:
+  # Identificação da máquina
+  machine_id: "machine-1"
+  is_coordinator: false
+  
+  # Configurações do coordenador
+  coordinator:
+    host: "192.168.1.100"
+    port: 12345
+  
+  # Recursos da máquina
+  resources:
+    cpu_cores: 8
+    gpu_memory_gb: 16
+    ram_gb: 64
+    storage_gb: 50
+    
+  # Compartilhamento de recursos
+  resource_sharing:
+    enabled: true
+    max_cpu_share: 0.8
+    max_gpu_share: 0.8
+    max_ram_share: 0.7
+
+training:
+  # Configurações de treinamento
+  batch_size: 32
+  checkpoint_frequency: 1000
+  validate_frequency: 100
+  
+  # Configurações de distribuição
+  distributed_strategy: "multi_worker_mirrored"
+  sync_frequency: 100
