@@ -934,7 +934,7 @@ class DatasetTrainingManager:
                 os.remove(os.path.join(chunk_path, chunk_file))
             os.rmdir(chunk_path)
 
-async def async_training_loop(config):
+async def async_training_loop(config, datasets):
     storage_config = StorageConfig(**config['storage'])
     model_config = ModelConfig(**config['model'])
     data_manager = DataManager(storage_config)
@@ -954,19 +954,12 @@ async def async_training_loop(config):
                 metrics=model_config.metrics
             )
         
-        # Lista de datasets para processar
-        datasets = [
-            {"id": "dataset1", "size_gb": 200},
-            {"id": "dataset2", "size_gb": 500},
-            {"id": "dataset3", "size_gb": 300}
-        ]
-        
-        for epoch in range(model_config.num_epochs):
-            print(f"Epoch {epoch + 1}/{model_config.num_epochs}")
+        for epoch in range(config['model']['num_epochs']):
+            print(f"Epoch {epoch + 1}/{config['model']['num_epochs']}")
             
-            for dataset in datasets:
-                # Processa dataset
-                await distributed_manager.process_dataset(dataset["id"], dataset["size_gb"])
+	for dataset in datasets:
+            # Processa dataset
+            await distributed_manager.process_dataset(dataset["id"], dataset["size_gb"])
             
             # Dados para treinamento
             train_data = tf.data.TFRecordDataset(data_manager.get_data('s3', 'train_data.tfrecord'))
@@ -992,9 +985,11 @@ async def async_training_loop(config):
 def main():
     # Carrega configuração
     config = load_config('config.yaml')
+
+    datasets = config.get('datasets', [])
     
     # Executa loop de treinamento assíncrono
-    asyncio.run(async_training_loop(config))
+    asyncio.run(async_training_loop(config, datasets))
 
 if __name__ == "__main__":
     main()
