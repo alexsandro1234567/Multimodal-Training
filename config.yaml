@@ -60,6 +60,14 @@ storage:
   cleanup_after_training: true
   keep_checkpoints: true
 
+datasets:
+  - id: "dataset1"
+    size_gb: 200
+  - id: "dataset2"
+    size_gb: 500
+  - id: "dataset3"
+    size_gb: 300
+
 model:
   text_embedding_dim: 512
   image_size: [224, 224]
