@@ -1,6 +1,6 @@
 Leia a Licença e o Readme. PT-BR
 
-# Code for Multimodal Artificial Intelligence Training
+# Multimodal Training
 
 Este repositório contém um pipeline avançado para treinamento de modelos de inteligência artificial multimodal. Ele suporta processamento, treinamento e monitoramento de dados em múltiplas modalidades, como texto, imagem, vídeo, áudio, dados tabulares e muito mais.
 
